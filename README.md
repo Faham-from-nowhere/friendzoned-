@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧨 Friendship Day Prank Engine 😈
 
-## Getting Started
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/nuclear-roast-reactor&project-name=friendship-day-roaster&repository-name=friendship-day-roaster)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-black?logo=next.js)
+![Friendship Level](https://img.shields.io/badge/friendship--points--left-0-critical)
 
-First, run the development server:
+Welcome to the **ultimate friendship stress test** — a dynamic, customizable web app designed to humiliate, troll, and weird out your friends in the most *nuclear* way possible. From fake confessions to subtle rickrolls, this is your complete friendship day weapon.
+
+## 🧩 Features
+
+> Choose your weapons. Each page is tailor-made for social chaos.
+
+- 🎓 **Friendship Certificate Generator**  
+  Get a totally legit diploma proving your 1000-year-old bond.
+
+- 🧠 **Friendship Quiz**  
+  “How well do you know me?” turns into “Why are we even friends?”
+  
+- 🏃‍♂️ **Submit Button That Runs Away**  
+  They’ll never click it. You’ll never stop laughing.
+
+- 🕰️ **Friendship Timeline Generator**  
+  AI-generated “memories” you never had. (Or wish you didn’t.)
+
+- ✨ **Compliment Generator**  
+  Weirdly nice things that sound suspiciously sarcastic.
+
+- 🐸 **Spin the Roast Wheel**  
+  Randomized verbal violence.
+
+- 🗿 **Legacy Mode**  
+  Old-school HTML aesthetic with 90s bling and Comic Sans.
+
+- 🔓 **Unlockable Levels**  
+  As they explore, new pages unlock. Surprise, horror, joy.
+
+- 🔐 **Customizable Prank URLs**  
+  Every user gets a personal link with their name, so they can prank friends too:  
+  `https://yourdomain.com/f/<slug>`
+
+## 🛠️ Stack
+
+| Layer         | Tech Used              |
+|---------------|------------------------|
+| Frontend      | Next.js + TailwindCSS  |
+| Backend       | Node.js / Next API Routes |
+| Auth          | Firebase Auth (or JWT) |
+| Storage       | Firebase / Supabase    |
+| Hosting       | Vercel / Netlify       |
+
+## 🔧 Local Development
 
 ```bash
+# Clone the repo
+git clone https://github.com/your-username/friendship-prank-engine.git
+cd friendship-prank-engine
+
+# Install deps
+npm install
+
+# Set environment variables
+cp .env.example .env.local
+# Fill in NEXT_PUBLIC_APP_URL, Firebase keys, etc.
+
+# Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🧠 How It Works
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Users go to the homepage and customize their prank set.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+2. A unique link is generated (/f/:slug).
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. When friends open the link, they fall into the prank vortex.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+4. Each page reacts based on the slug’s settings and progress.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Analytics & unlockables track chaos caused.
+
+
+
+🚨 Abuse Prevention
+
+To avoid spam:
+
+Optional login for prank creators
+
+Link expiration & access limits
+
+Rate-limiting + abuse detection
+
+
+✨ Contribution Guide
+
+Feel free to fork, clone, and create your own flavor of humiliation.
+
+Report bugs via Issues
+
+PRs are welcome — especially for new prank ideas!
+
+Strict no-lameness policy
+
+
+🙏 Acknowledgements
+
+Inspired by viral troll sites of the 2000s.
+
+Thanks to our friends who endured testing. You're the real MVPs.
+
+
+⚠️ Disclaimer
+
+This is a satire-based project. Do not use it for harassment or bullying.
+Friendship means making each other laugh — not cry for real.
+
+
+
+
+Made with ❤️ + 🧨 by The Loner
+
