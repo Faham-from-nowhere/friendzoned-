@@ -19,12 +19,21 @@ export default function SignupPage() {
       await createUserWithEmailAndPassword(auth, email, password);
       // On successful signup, redirect to the homepage
       router.push('/');
-    } catch (err: any) {
+    } catch (err: unknown) {
       // Firebase provides more specific error messages for signup
-      if (err.code === 'auth/weak-password') {
-        setError('The password must be at least 6 characters long.');
-      } else if (err.code === 'auth/email-already-in-use') {
-        setError('This email address is already in use.');
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'code' in err &&
+        typeof (err as { code: string }).code === 'string'
+      ) {
+        if ((err as { code: string }).code === 'auth/weak-password') {
+          setError('The password must be at least 6 characters long.');
+        } else if ((err as { code: string }).code === 'auth/email-already-in-use') {
+          setError('This email address is already in use.');
+        } else {
+          setError('Failed to create an account. Please try again.');
+        }
       } else {
         setError('Failed to create an account. Please try again.');
       }

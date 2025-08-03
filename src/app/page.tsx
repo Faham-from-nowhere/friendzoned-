@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db, auth } from '@/lib/firebaseConfig';
 import { customAlphabet } from 'nanoid';
@@ -15,7 +15,7 @@ export default function HomePage() {
   // New state to hold the generated URL
   const [generatedUrl, setGeneratedUrl] = useState('');
   
-  const router = useRouter();
+ 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,7 +96,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <label htmlFor="friendName" className="block text-sm font-medium text-gray-700">Your Friend's Name</label>
-                  <input id="friendName" type="text" value={friendName} onChange={(e) => setFriendName(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 text-gray-900 shadow-sm" placeholder="Enter your victim's... I mean friend's name" />
+                  <input id="friendName" type="text" value={friendName} onChange={(e) => setFriendName(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 text-gray-900 shadow-sm" placeholder="Enter your victim&apos;s... I mean friend&apos;s name" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Roast Level</label>

@@ -51,7 +51,7 @@ const messagePools = {
 type RoastLevel = keyof typeof messagePools;
 
 // Helper function to get a random item from an array
-const getRandomItem = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
+const getRandomItem = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
 type ChatProps = {
   friendName: string;
