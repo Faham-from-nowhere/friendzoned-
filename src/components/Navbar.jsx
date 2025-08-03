@@ -39,11 +39,11 @@ export default function Navbar() {
                 {user ? (
                     // This is the part to check
                     <div className="flex items-center space-x-4">
-                        {/* The Dashboard link is correct */}
+                        
                         <Link href="/dashboard" className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
                             Dashboard
                         </Link>
-                        {/* The Logout button should NOT be inside a <Link> tag */}
+                        
                         <button
                             onClick={handleLogout}
                             className="rounded-md bg-red-500 px-3 py-2 text-sm font-medium text-white hover:bg-red-600"
@@ -52,7 +52,7 @@ export default function Navbar() {
                         </button>
                     </div>
                 ) : (
-                    // This part is for when the user is logged out
+                    
                     <Link href="/login" className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
                         Login
                     </Link>
