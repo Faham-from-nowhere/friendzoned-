@@ -19,7 +19,7 @@ export default function SignupPage() {
       await createUserWithEmailAndPassword(auth, email, password);
       // On successful signup, redirect to the homepage
       router.push('/');
-    } catch (err: any) {
+    } } catch (err: { code: string }) { {
       // Firebase provides more specific error messages for signup
       if (err.code === 'auth/weak-password') {
         setError('The password must be at least 6 characters long.');
