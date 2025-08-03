@@ -37,7 +37,7 @@ const compliments = [
   { start: "You're built different...", end: "...like a vending machine that eats your money and your soul." },
 ];
 
-const getRandomItem = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
+const getRandomItem = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
 export default function GlitchyCompliment() {
   const [compliment, setCompliment] = useState<{start: string, end: string} | null>(null);
