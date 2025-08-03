@@ -7,7 +7,6 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import FriendshipQuiz from '@/components/FriendshipQuiz';
 import GlitchyCompliment from '@/components/GlitchyCompliment';
 import LegacyMode from '@/components/LegacyMode';
-// Import Components
 import FriendshipCertificate from '@/components/FriendshipCertificate';
 import AppreciationChat from '@/components/AppreciationChat';
 import SpinTheWheel, { type RoastLevel } from '@/components/SpinTheWheel'; // Updated import
@@ -17,7 +16,7 @@ import AiTimeline from '@/components/AiTimeline';
 type ForeverData = {
   creatorName: string;
   friendName: string;
-  roastLevel?: RoastLevel; // <-- ADD THIS
+  roastLevel?: RoastLevel; 
 };
 
 export default function ForeverPage() {
