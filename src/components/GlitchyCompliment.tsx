@@ -40,7 +40,7 @@ const compliments = [
 const getRandomItem = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
 export default function GlitchyCompliment() {
-  const [compliment, setCompliment] = useState<{start: string, end: string} | null>(null);
+  const [_compliment, setCompliment] = useState<{start: string, end: string} | null>(null);
   const [displayText, setDisplayText] = useState("Click the button for a compliment!");
   const [isGlitching, setIsGlitching] = useState(false);
 
