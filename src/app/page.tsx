@@ -95,7 +95,7 @@ export default function HomePage() {
                   <input id="creatorName" type="text" value={creatorName} onChange={(e) => setCreatorName(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 text-gray-900 shadow-sm" placeholder="Enter your name" />
                 </div>
                 <div>
-                  <label htmlFor="friendName" className="block text-sm font-medium text-gray-700">Your Friend's Name</label>
+                  <label htmlFor="friendName" className="block text-sm font-medium text-gray-700">Your Friend&apos;s Name</label>
                   <input id="friendName" type="text" value={friendName} onChange={(e) => setFriendName(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 text-gray-900 shadow-sm" placeholder="Enter your victim&apos;s... I mean friend&apos;s name" />
                 </div>
                 <div>
