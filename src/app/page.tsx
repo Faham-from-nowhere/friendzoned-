@@ -1,103 +1,118 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db, auth } from '@/lib/firebaseConfig';
+import { customAlphabet } from 'nanoid';
+
+export default function HomePage() {
+  const [creatorName, setCreatorName] = useState('');
+  const [friendName, setFriendName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [roastLevel, setRoastLevel] = useState('Mild');
+  
+  // New state to hold the generated URL
+  const [generatedUrl, setGeneratedUrl] = useState('');
+  
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!creatorName || !friendName) {
+      alert('Please fill out both names!');
+      return;
+    }
+
+    const user = auth.currentUser;
+    setIsLoading(true);
+    const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 8);
+    const slug = nanoid();
+
+    try {
+      await addDoc(collection(db, "forevers"), {
+        slug: slug,
+        creatorName: creatorName,
+        friendName: friendName,
+        createdAt: serverTimestamp(),
+        creatorId: user ? user.uid : null,
+        roastLevel: roastLevel,
+      });
+
+      // Construct the full URL and set it in state
+      const fullUrl = `${process.env.NEXT_PUBLIC_APP_URL}/f/${slug}`;
+      setGeneratedUrl(fullUrl);
+
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert('Failed to create your link. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  const handleCopy = () => {
+      navigator.clipboard.writeText(generatedUrl);
+      alert("Link copied to clipboard!");
+  }
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-8">
+      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
+        
+        {/* Conditionally render the success view or the form */}
+        {generatedUrl ? (
+          // View to show AFTER link is generated
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-green-600">Link Generated!</h1>
+            <p className="mt-2 text-gray-600">Copy the link below and send it to your friend.</p>
+            <div className="mt-4 flex">
+              <input 
+                type="text"
+                value={generatedUrl}
+                readOnly
+                className="w-full rounded-l-md border-gray-300 bg-gray-100 text-gray-700"
+              />
+              <button onClick={handleCopy} className="rounded-r-md bg-indigo-600 px-4 text-white hover:bg-indigo-700">Copy</button>
+            </div>
+            <button 
+              onClick={() => setGeneratedUrl('')} 
+              className="mt-6 w-full rounded-md bg-gray-700 px-4 py-2 text-white hover:bg-gray-800"
+            >
+              Create Another Prank
+            </button>
+          </div>
+        ) : (
+          // The creation form
+          <div>
+            <h1 className="mb-6 text-center text-3xl font-bold text-gray-800">
+              FriendShame Generator
+            </h1>
+            <form onSubmit={handleSubmit} className="space-y-6">
+                {/* All your form inputs (names, roast level) go here */}
+                <div>
+                  <label htmlFor="creatorName" className="block text-sm font-medium text-gray-700">Your Name</label>
+                  <input id="creatorName" type="text" value={creatorName} onChange={(e) => setCreatorName(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 text-gray-900 shadow-sm" placeholder="Enter your name" />
+                </div>
+                <div>
+                  <label htmlFor="friendName" className="block text-sm font-medium text-gray-700">Your Friend's Name</label>
+                  <input id="friendName" type="text" value={friendName} onChange={(e) => setFriendName(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 text-gray-900 shadow-sm" placeholder="Enter your victim's... I mean friend's name" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Roast Level</label>
+                  <div className="mt-2 grid grid-cols-3 gap-2">
+                    <button type="button" onClick={() => setRoastLevel('Mild')} className={`px-3 py-2 text-sm rounded-md ${roastLevel === 'Mild' ? 'bg-yellow-400 font-bold ring-2 ring-black' : 'bg-gray-200'}`}>🔥 Mild</button>
+                    <button type="button" onClick={() => setRoastLevel('Medium')} className={`px-3 py-2 text-sm rounded-md ${roastLevel === 'Medium' ? 'bg-orange-500 font-bold text-white ring-2 ring-black' : 'bg-gray-200'}`}>🔥🔥 Medium</button>
+                    <button type="button" onClick={() => setRoastLevel('Nuclear')} className={`px-3 py-2 text-sm rounded-md ${roastLevel === 'Nuclear' ? 'bg-red-600 font-bold text-white ring-2 ring-black' : 'bg-gray-200'}`}>💀🔥 Nuclear</button>
+                  </div>
+                </div>
+                <button type="submit" disabled={isLoading} className="w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 disabled:bg-indigo-400">
+                  {isLoading ? 'Generating...' : 'Generate Prank Link'}
+                </button>
+            </form>
+          </div>
+        )}
+      </div>
+    </main>
   );
 }
