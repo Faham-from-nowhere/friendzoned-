@@ -89,7 +89,7 @@ export default function HomePage() {
               FriendShame Generator
             </h1>
             <form onSubmit={handleSubmit} className="space-y-6">
-                {/* All your form inputs (names, roast level) go here */}
+                {/* All our form inputs (names, roast level) go here */}
                 <div>
                   <label htmlFor="creatorName" className="block text-sm font-medium text-gray-700">Your Name</label>
                   <input id="creatorName" type="text" value={creatorName} onChange={(e) => setCreatorName(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 text-gray-900 shadow-sm" placeholder="Enter your name" />
