@@ -61,7 +61,7 @@ export default function DashboardPage() {
           ))}
         </div>
       ) : (
-        <p className="text-gray-600">You haven't created any Forevers yet. <Link href="/" className="text-indigo-600 font-bold">Create one now!</Link></p>
+        <p className="text-gray-600">You haven&apos;t created any Forevers yet. <Link href="/" className="text-indigo-600 font-bold">Create one now!</Link></p>
       )}
     </main>
   );
